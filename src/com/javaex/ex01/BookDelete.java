@@ -59,7 +59,6 @@ public class BookDelete {
           5. 자원정리
           ****************/
          try {
-
             if (pstmt != null) {
                pstmt.close();
             }

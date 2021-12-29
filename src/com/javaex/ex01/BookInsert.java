@@ -78,7 +78,6 @@ public class BookInsert {
           5. 자원정리
          **********************/
          try {
-
             if (pstmt != null) {
                pstmt.close();
             }
@@ -89,5 +88,6 @@ public class BookInsert {
             System.out.println("error:" + e);
          }
       }
+      
    }
 }

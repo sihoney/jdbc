@@ -71,7 +71,6 @@ public class BookUpdate {
           5. 자원정리
          *******************/
          try {
-
             if (pstmt != null) {
                pstmt.close();
             }
@@ -83,5 +82,6 @@ public class BookUpdate {
             System.out.println("error:" + e);
          }
       }
+      
    }
 }
