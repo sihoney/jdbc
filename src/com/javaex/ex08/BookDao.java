@@ -1,4 +1,4 @@
-package com.javaex.ex07;
+package com.javaex.ex08;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,10 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
-
-import com.javaex.ex01.Book;
-import com.javaex.ex01.BookAuthor;
 
 public class BookDao {
 
@@ -205,4 +201,56 @@ public class BookDao {
 		this.close();
 		return aList;
 	}
+	
+	public ArrayList<BookVo> bookSearch(String search) {
+		
+		search = '%' + search + '%';
+		
+		ArrayList<BookVo> aList = new ArrayList<>();
+		this.getConnection();
+		
+		try {			
+			// 3. SQL문 준비 / 바인딩 / 실행
+			String query = "";
+			query += " select book_id,  ";
+			query += " 		  title, ";
+			query += " 		  pubs, ";
+			query += " 		  pub_date, ";
+			query += " 		  author_name ";
+			query += " from book, author ";
+			query += " where author.author_id = book.author_id ";
+			query += " and (title like ? or ";
+			query += " 		pubs like ? or ";
+			query += " 		author_name like ?) ";
+			
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, search);
+			pstmt.setString(2, search);
+			pstmt.setString(3, search);
+			
+			rs = pstmt.executeQuery();
+		
+			// 4.결과처리
+			while(rs.next()) {
+				int bookId = rs.getInt(1);
+				String title = rs.getString(2);
+				String pubs = rs.getString(3);
+				String pubDate = rs.getString(4);
+				String authorName = rs.getString(5);
+				
+				aList.add(new BookVo(bookId, title, pubs, pubDate, authorName));
+			}
+			System.out.println("검색이 끝났습니다.");
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+			
+		} 
+		
+		this.close();
+		
+		return aList;
+	}
+
 }

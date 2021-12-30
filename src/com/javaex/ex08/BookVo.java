@@ -1,4 +1,4 @@
-package com.javaex.ex07;
+package com.javaex.ex08;
 
 public class BookVo {
 
@@ -7,28 +7,27 @@ public class BookVo {
 	private String pubs;
 	private String pubDate;
 	private int authorId;
-	/*
 	private String authorName;
-	private String authorDesc;
-	*/
+	//private String authorDesc;
+	
 	
 	public BookVo() {
 		
 	}
-	
+	// update
 	public BookVo(String pubs, String pubDate, int bookId) {
 		this.pubs = pubs;
 		this.pubDate = pubDate;
 		this.bookId = bookId;
 	}
-	
+	// insert
 	public BookVo(String title, String pubs, String pubDate, int authorId) {
 		this.title = title;
 		this.pubs = pubs;
 		this.pubDate = pubDate;
 		this.authorId = authorId;
 	}
-	
+	// select
 	public BookVo(int bookId, String title, String pubs, String pubDate) {
 		super();
 		this.bookId = bookId;
@@ -36,8 +35,15 @@ public class BookVo {
 		this.pubs = pubs;
 		this.pubDate = pubDate;
 	}
-
-	
+	// search
+	public BookVo(int bookId, String title, String pubs, String pubDate, String authorName) {
+		super();
+		this.bookId = bookId;
+		this.title = title;
+		this.pubs = pubs;
+		this.pubDate = pubDate;
+		this.authorName = authorName;
+	}
 
 	public int getBookId() {
 		return bookId;
@@ -78,11 +84,10 @@ public class BookVo {
 	public void setAuthorId(int authorId) {
 		this.authorId = authorId;
 	}
-
 	@Override
 	public String toString() {
 		return "BookVo [bookId=" + bookId + ", title=" + title + ", pubs=" + pubs + ", pubDate=" + pubDate
-				+ ", authorId=" + authorId + "]";
+				+ ", authorId=" + authorId + ", authorName=" + authorName + "]";
 	}
 	
 }
